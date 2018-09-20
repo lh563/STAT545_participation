@@ -143,22 +143,38 @@ Let's make _box plots_ of population for each continent. Note: y-axis is much be
 | Grammar Component     | Specification |
 |-----------------------|---------------|
 | __data__              | `gapminder` |
-| __aesthetic mapping__ |  |
-| __geometric object__  |  |
-| scale                 |  |
-| statistical transform |  |
+| __aesthetic mapping__ | 'x'and'y' |
+| __geometric object__  | boxplot |
+| scale                 | log-y |
+| statistical transform |5-number summary  |
 
 2. Initiate the `ggplot` call, with the log y scale, and store it in the variable `a`. Print out `a`.
 
+```{r}
+a<-ggplot(gapminder,aes(x=continent,pop)) +
+  scale_y_log10()
+a
+```
 
 
 3. Add the boxplot geom to `a`.
 
+```{r}
+a<-ggplot(gapminder,aes(continent,pop)) +
+  scale_y_log10()+
+  geom_boxplot()
+a
+```
 
 
 4. A violin plot is a kernel density on its side, made symmetric. Add that geom to `a`.
     - What's better here, boxplots or violin plots? Why?
-
+```{r}
+a<-ggplot(gapminder,aes(continent,pop)) +
+  scale_y_log10()+
+  geom_violin()
+a
+```
 5. Optional: git stage and commit
 
 __Use of boxplot__: Visualize 1-dimensional distributions (of a single numeric variable).
@@ -170,14 +186,28 @@ Let's work up to the concept of a _jitter plot_. As above, let's explore the pop
 Let's hold off on identifying the grammar. 
 
 1. Initiate the `ggplot` call to make a scatterplot of `continent` vs `pop`; initiate the log y scale. Store the call in the variable `b`.
+```{r}
+b<-ggplot(gapminder,aes(continent,pop)) +
+  scale_y_log10()
+
+b+geom_jitter(alpha=0.1)
+```
 
 
 
 2. Add the point geom to `b`. Why is this an ineffective plot?
+```{r}
+
+```
 
 
 
 3. A solution is to jitter the points. Add the jitter geom. Re-run the command a few times -- does the plot change? Why?
+#get a full complete picture of data; see how many data points in the violin plots
+```{r}
+b+geom_violin()+
+  geom_jitter(alpha=0.1)
+```
 
 
 
@@ -213,10 +243,24 @@ Let's make some time/line plot, starting with Canada's life expectancy over time
     4. Also displays the points
 
 
+```{r}
+gapminder %>% 
+  filter(country=="Canada") %>% 
+  ggplot(aes(year,lifeExp)) + 
+  geom_line()+
+  geom_point()
+
+```
+
+
 
 3. Attempt to overlay line plots for all countries. That is, repeat the above code, but don't filter. What's wrong here?
 
-
+```{r}
+c<-ggplot(gapminder,aes(year,lifeExp))
+c+ geom_line()
+c+ geom_line(aes(group=country),alpha=0.2)
+```
 
 4. Use the `group` aesthetic to fix the problem.
 
