@@ -1,7 +1,9 @@
 ---
-title: "cm006 Exercises: Exploring Geometric Objects"
-output: html_notebook
-editor_options: 
+title: 'cm006 Exercises: Exploring Geometric Objects'
+output:
+  html_document:
+    df_print: paged
+editor_options:
   chunk_output_type: inline
 ---
 
