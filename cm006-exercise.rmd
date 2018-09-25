@@ -18,6 +18,8 @@ library(gapminder)
 
 ## Scatterplot
 
+
+
 Let's look at a _scatterplot_ of `gdpPercap` vs. `lifeExp`. 
 
 1. Fill out the grammar components below. Again, bold _must_ be specified to make a `ggplot2` plot.
