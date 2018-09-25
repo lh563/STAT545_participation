@@ -11,14 +11,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ─────────────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ────────────────────────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
     ## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
     ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
     ## ✔ readr   1.1.1     ✔ forcats 0.3.0
 
-    ## ── Conflicts ────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -29,11 +29,16 @@ Shapes
 
 ``` r
 gvsl<-ggplot(gapminder,aes(gdpPercap,lifeExp)) + scale_x_log10()
-
-gvsl+geom_point(shape="$")
+gvsl+geom_point(aes(shape=continent),alpha=0.2)
 ```
 
 ![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+``` r
+gvsl+geom_point(shape="$")
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
 -   As with all (?) aesthetics, we can also have them *not* as aesthetics!
     -   Try some shapes: first as integer from 0-24, then as keyboard characters.
@@ -193,6 +198,40 @@ Let's see how Rwanda's life expectancy and GDP per capita have evolved over time
 
 -   Try `geom_line()`. Try `geom_point()`.
 
+``` r
+summary(gapminder)
+```
+
+    ##         country        continent        year         lifeExp     
+    ##  Afghanistan:  12   Africa  :624   Min.   :1952   Min.   :23.60  
+    ##  Albania    :  12   Americas:300   1st Qu.:1966   1st Qu.:48.20  
+    ##  Algeria    :  12   Asia    :396   Median :1980   Median :60.71  
+    ##  Angola     :  12   Europe  :360   Mean   :1980   Mean   :59.47  
+    ##  Argentina  :  12   Oceania : 24   3rd Qu.:1993   3rd Qu.:70.85  
+    ##  Australia  :  12                  Max.   :2007   Max.   :82.60  
+    ##  (Other)    :1632                                                
+    ##       pop              gdpPercap       
+    ##  Min.   :6.001e+04   Min.   :   241.2  
+    ##  1st Qu.:2.794e+06   1st Qu.:  1202.1  
+    ##  Median :7.024e+06   Median :  3531.8  
+    ##  Mean   :2.960e+07   Mean   :  7215.3  
+    ##  3rd Qu.:1.959e+07   3rd Qu.:  9325.5  
+    ##  Max.   :1.319e+09   Max.   :113523.1  
+    ## 
+
+``` r
+gapminder %>% 
+  filter(country=="Rwanda") %>% 
+  arrange(year) %>% 
+  ggplot(aes(gdpPercap,lifeExp))+
+  #scale_x_log10+
+  geom_point()+
+  #geom_line()
+  geom_path(arrow=arrow())
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-17-1.png)
+
 -   Add `arrow=arrow()` option.
 
 -   Add `geom_text`, with year label.
@@ -203,6 +242,20 @@ Two categorical variables
 Try `cyl` (number of cylinders) ~ `am` (transmission) in the `mtcars` data frame.
 
 -   Scatterplot? Jitterplot? No.
+
+``` r
+ggplot(mtcars,aes(factor(cyl),factor(am)))+
+  #geom_point()+
+  #geom_jitter()+
+ # geom_count()+
+  geom_bin2d()
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-20-1.png)
+
+``` r
+  #for heat map, gene expression
+```
 
 -   `geom_count()`.
 
@@ -218,6 +271,24 @@ Try a scatterplot with:
 -   `geom_density2d()`
 -   `geom_smooth()`
 
+``` r
+gvsl+geom_hex()
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-22-1.png)
+
+``` r
+gvsl+geom_density2d()
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-22-2.png)
+
+``` r
+gvsl+geom_point(alpha=0.1)+geom_smooth(method="lm")
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-22-3.png)
+
 Bar plots
 ---------
 
@@ -225,7 +296,16 @@ How many countries are in each continent? Use the year 2007.
 
 1.  After filtering the gapminder data to 2007, make a bar chart of the number of countries in each continent. Store everything except the geom in the variable `d`.
 
-2.  Notice the y-axis. Oddly, `ggplot2` doesn't make it obvious how to change to proportion. Try adding a `y` aesthetic: `y=..count../sum(..count..)`.
+``` r
+gapminder %>% 
+  filter(year==2007) %>% 
+  ggplot(aes(x=continent))+
+  geom_bar()
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-23-1.png)
+
+1.  Notice the y-axis. Oddly, `ggplot2` doesn't make it obvious how to change to proportion. Try adding a `y` aesthetic: `y=..count../sum(..count..)`.
 
 **Uses of bar plots**: Get a sense of relative quantities of categories, or see the probability mass function of a categorical random variable.
 
@@ -233,6 +313,16 @@ Polar coordinates
 -----------------
 
 -   Add `coord_polar()` to a scatterplot.
+
+``` r
+gvsl+geom_point()+coord_polar()
+```
+
+![](cm007-exercise_files/figure-markdown_github/unnamed-chunk-24-1.png)
+
+``` r
+#geological data, distance from the center
+```
 
 Want more practice?
 ===================
