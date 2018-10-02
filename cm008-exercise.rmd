@@ -214,10 +214,7 @@ gapminder %>%
   group_by(continent, country) %>% 
   mutate(gain=lifeExp-lag(lifeExp)) %>% 
   filter(! is.na(gain)) %>% 
-  summarise(min(gain)) %>% 
-  
-  summarise(min=min(min)) %>% 
-  arrange(min)
+  summarise(min(gain))
   
 
 ```
