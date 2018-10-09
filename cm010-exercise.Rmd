@@ -203,8 +203,8 @@ setdiff(z,y)
 ```{r}
 (x <- tibble(x1 = c("B", "C", "D"), x3 = 2:4))
 y
-intersect(y,x)
-#must have the same colum name
+#intersect(y,x)
+##must have the same colum name
 ```
 
 ## Types of binding datasets
@@ -248,11 +248,11 @@ anti_join(flights2,weather,by=c("year","time_hour"))
 
 ### 2. Can we apply `set` and `binding` funcions between `flights2` and `weather` datasets. Why and why not?
 ```{r}
-intersect(flights2,weather)
-setdiff(flights2,weather)
-bind_rows(flights2,weather)
-bind_cols(flights2,weather)
-union(flights2,weather)
+#intersect(flights2,weather)
+#setdiff(flights2,weather)
+#bind_rows(flights2,weather)
+#bind_cols(flights2,weather)
+#union(flights2,weather)
 ```
 
 
