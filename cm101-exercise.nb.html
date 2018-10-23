@@ -227,12 +227,12 @@ $(document).ready(function () {
 <p>Exercise: turn this into a function! i.e., write a function that returns the max minus min of a vector. Try it out on the gapminder variables.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKG1heF9taW51c19taW4gPC0gbWF4KGdhcG1pbmRlciRnZHBQZXJjYXApIC0gbWluKGdhcG1pbmRlciRnZHBQZXJjYXApKVxuXG5gYGAifQ== -->
-<pre class="r"><code>(max_minus_min &lt;- max(gapminder$gdpPercap) - min(gapminder$gdpPercap))
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF4X21pbnVzX21pbigxOjEwKVxuXG5gYGAifQ== -->
+<pre class="r"><code>max_minus_min(1:10)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDExMzI4MlxuIn0= -->
-<pre><code>[1] 113282</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDlcbiJ9 -->
+<pre><code>[1] 9</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -251,36 +251,47 @@ $(document).ready(function () {
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKG1heF9taW51c19taW4oMToxMCkpXG5cbmBgYCJ9 -->
-<pre class="r"><code>(max_minus_min(1:10))
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF4X21pbnVzX21pbihydW5pZigxMDApKVxuXG5gYGAifQ== -->
+<pre class="r"><code>max_minus_min(runif(100))
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoibm8gbm9uLW1pc3NpbmcgYXJndW1lbnRzIHRvIG1heDsgcmV0dXJuaW5nIC1JbmZubyBub24tbWlzc2luZyBhcmd1bWVudHMgdG8gbWluOyByZXR1cm5pbmcgSW5mXG4ifQ== -->
-<pre><code>no non-missing arguments to max; returning -Infno non-missing arguments to min; returning Inf</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIC1JbmZcbiJ9 -->
-<pre><code>[1] -Inf</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuOTg3NjIyOVxuIn0= -->
+<pre><code>[1] 0.9876229</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Let’s formalize this testing with the <code>testthat</code> package. <code>expect_*()</code> functions:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhwZWN0X2VxdWFsKDAuMSArIDAuMiwgMC4zKVxuZXhwZWN0X2lkZW50aWNhbCgwLjEgKyAwLjIsIDAuMylcbmBgYCJ9 -->
-<pre class="r"><code>expect_equal(0.1 + 0.2, 0.3)
-expect_identical(0.1 + 0.2, 0.3)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhwZWN0X2lkZW50aWNhbCgwLjEgKyAwLjIsIDAuMylcblxuYGBgIn0= -->
+<pre class="r"><code>expect_identical(0.1 + 0.2, 0.3)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZXhwZWN0X2lkZW50aWNhbCgwLjEgKyAwLjIsIDAuMykgOiBcbiAgY291bGQgbm90IGZpbmQgZnVuY3Rpb24gXCJleHBlY3RfaWRlbnRpY2FsXCJcbiJ9 -->
+<pre><code>Error in expect_identical(0.1 + 0.2, 0.3) : 
+  could not find function &quot;expect_identical&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Add another check to the following unit test, based on the uniform random numbers:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF90aGF0KFwiU2ltcGxlIGNhc2VzIHdvcmtcIiwge1xuICAgIGV4cGVjdF9lcXVhbChtYXhfbWludXNfbWluKDE6MTApLCA5KVxuICAgIEZJTExfVEhJU19JTlxufSlcbmBgYCJ9 -->
-<pre class="r"><code>test_that(&quot;Simple cases work&quot;, {
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2xzPWxlc3MgdGhhblxudGVzdF90aGF0KFwiU2ltcGxlIGNhc2VzIHdvcmtcIiwge1xuICAgIGV4cGVjdF9lcXVhbChtYXhfbWludXNfbWluKDE6MTApLCA5KVxuICAgIGV4cGVjdF9sdChtYXhfbWludXNfbWluKHJ1bmlmKDEwMCksMSkpXG4gICAgXG59KVxuXG5gYGAifQ== -->
+<pre class="r"><code>#ls=less than
+test_that(&quot;Simple cases work&quot;, {
     expect_equal(max_minus_min(1:10), 9)
-    FILL_THIS_IN
-})</code></pre>
+    expect_lt(max_minus_min(runif(100),1))
+    
+})
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IFRlc3QgZmFpbGVkOiAnU2ltcGxlIGNhc2VzIHdvcmsnXG4qIHVudXNlZCBhcmd1bWVudCAoMSlcbjE6IGV4cGVjdF9sdChtYXhfbWludXNfbWluKHJ1bmlmKDEwMCksIDEpKSBhdCA6M1xuMjogcXVhc2lfbGFiZWwoZW5xdW8ob2JqZWN0KSwgbGFiZWwpXG4zOiBldmFsX2JhcmUoZ2V0X2V4cHIocXVvKSwgZ2V0X2VudihxdW8pKVxuIn0= -->
+<pre><code>Error: Test failed: 'Simple cases work'
+* unused argument (1)
+1: expect_lt(max_minus_min(runif(100), 1)) at :3
+2: quasi_label(enquo(object), label)
+3: eval_bare(get_expr(quo), get_env(quo))</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -289,11 +300,16 @@ expect_identical(0.1 + 0.2, 0.3)</code></pre>
 <p>Because you will eventually forget the function specifics.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF4X21pbnVzX21pbihudW1lcmljKDApKVxubWF4X21pbnVzX21pbihnYXBtaW5kZXIpXG5tYXhfbWludXNfbWluKGdhcG1pbmRlciRjb3VudHJ5KVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF4X21pbnVzX21pbihudW1lcmljKDApKVxuXG5gYGAifQ== -->
 <pre class="r"><code>max_minus_min(numeric(0))
-max_minus_min(gapminder)
-max_minus_min(gapminder$country)</code></pre>
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoibm8gbm9uLW1pc3NpbmcgYXJndW1lbnRzIHRvIG1heDsgcmV0dXJuaW5nIC1JbmZubyBub24tbWlzc2luZyBhcmd1bWVudHMgdG8gbWluOyByZXR1cm5pbmcgSW5mXG4ifQ== -->
+<pre><code>no non-missing arguments to max; returning -Infno non-missing arguments to min; returning Inf</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIC1JbmZcbiJ9 -->
+<pre><code>[1] -Inf</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>These don’t break!</p>
@@ -313,10 +329,13 @@ max_minus_min(c(TRUE, TRUE, FALSE, TRUE, TRUE))</code></pre>
 <p>Check out <code>stopifnot</code> and <code>stop</code>:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RvcGlmbm90KEZBTFNFKVxuc3RvcChcIkhlcmUncyBteSBsaXR0bGUgZXJyb3IgbWVzc2FnZS5cIilcbmBgYCJ9 -->
-<pre class="r"><code>stopifnot(FALSE)
-stop(&quot;Here's my little error message.&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RvcChcIkhlcmUncyBteSBsaXR0bGUgZXJyb3IgbWVzc2FnZS5cIilcblxuYGBgIn0= -->
+<pre class="r"><code>stop(&quot;Here's my little error message.&quot;)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IEhlcmUncyBteSBsaXR0bGUgZXJyb3IgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Error: Here's my little error message.</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Your turn: Use two methods:</p>
@@ -325,12 +344,13 @@ stop(&quot;Here's my little error message.&quot;)</code></pre>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW1tMSA8LSBmdW5jdGlvbih4KSB7XG4gICAgRklMTF9USElTX0lOXG4gICAgbWF4KHgpIC0gbWluKHgpXG59XG5gYGAifQ== -->
-<pre class="r"><code>mmm1 &lt;- function(x) {
-    FILL_THIS_IN
-    max(x) - min(x)
-}</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW1tMShcImhlbGxvXCIpXG5cbmBgYCJ9 -->
+<pre class="r"><code>mmm1(&quot;hello&quot;)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbWF4KHgpIC0gbWluKHgpIDogbm9uLW51bWVyaWMgYXJndW1lbnQgdG8gYmluYXJ5IG9wZXJhdG9yXG4ifQ== -->
+<pre><code>Error in max(x) - min(x) : non-numeric argument to binary operator</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="2" style="list-style-type: decimal">
@@ -342,10 +362,10 @@ stop(&quot;Here's my little error message.&quot;)</code></pre>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW1tMiA8LSBmdW5jdGlvbih4KSB7XG4gICAgaWYgKCFpcy5udW1lcmljKHgpKSB7XG4gICAgICAgIEZJTExfVEhJU19JTlxuICAgIH1cbiAgICBtYXgoeCkgLSBtaW4oeClcbn1cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW1tMiA8LSBmdW5jdGlvbih4KSB7XG4gICAgaWYgKCFpcy5udW1lcmljKHgpKSB7XG4gICAgICAgIHN0b3AoXCJFeHBlY3RpbmcgeCB0byBiZSBudW1lcmljLiBZb3UgZ2F2ZSBtZVwiLHR5cGVvZih4KSlcbiAgICB9XG4gICAgbWF4KHgpIC0gbWluKHgpXG59XG5gYGAifQ== -->
 <pre class="r"><code>mmm2 &lt;- function(x) {
     if (!is.numeric(x)) {
-        FILL_THIS_IN
+        stop(&quot;Expecting x to be numeric. You gave me&quot;,typeof(x))
     }
     max(x) - min(x)
 }</code></pre>
@@ -355,19 +375,14 @@ stop(&quot;Here's my little error message.&quot;)</code></pre>
 <p>Try breaking the function now:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW1tMSgobnVtZXJpYygwKSkpXG5tbW0xKGdhcG1pbmRlcilcbm1tbTEoZ2FwbWluZGVyJGNvdW50cnkpXG5tbW0xKGdhcG1pbmRlcltjKCdsaWZlRXhwJywgJ2dkcFBlcmNhcCcsICdwb3AnKV0pXG5tbW0xKGMoVFJVRSwgVFJVRSwgRkFMU0UsIFRSVUUsIFRSVUUpKVxuXG5tbTIoKG51bWVyaWMoMCkpKVxubW1tMihnYXBtaW5kZXIpXG5tbW0yKGdhcG1pbmRlciRjb3VudHJ5KVxubW1tMihnYXBtaW5kZXJbYygnbGlmZUV4cCcsICdnZHBQZXJjYXAnLCAncG9wJyldKVxubW1tMihjKFRSVUUsIFRSVUUsIEZBTFNFLCBUUlVFLCBUUlVFKSlcbmBgYCJ9 -->
-<pre class="r"><code>mmm1((numeric(0)))
-mmm1(gapminder)
-mmm1(gapminder$country)
-mmm1(gapminder[c('lifeExp', 'gdpPercap', 'pop')])
-mmm1(c(TRUE, TRUE, FALSE, TRUE, TRUE))
-
-mm2((numeric(0)))
-mmm2(gapminder)
-mmm2(gapminder$country)
-mmm2(gapminder[c('lifeExp', 'gdpPercap', 'pop')])
-mmm2(c(TRUE, TRUE, FALSE, TRUE, TRUE))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW1tMihjKFRSVUUsIFRSVUUsIEZBTFNFLCBUUlVFLCBUUlVFKSlcblxuYGBgIn0= -->
+<pre class="r"><code>mmm2(c(TRUE, TRUE, FALSE, TRUE, TRUE))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbW1tMihjKFRSVUUsIFRSVUUsIEZBTFNFLCBUUlVFLCBUUlVFKSkgOiBcbiAgRXhwZWN0aW5nIHggdG8gYmUgbnVtZXJpYy4gWW91IGdhdmUgbWVsb2dpY2FsXG4ifQ== -->
+<pre><code>Error in mmm2(c(TRUE, TRUE, FALSE, TRUE, TRUE)) : 
+  Expecting x to be numeric. You gave melogical</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -376,29 +391,18 @@ mmm2(c(TRUE, TRUE, FALSE, TRUE, TRUE))</code></pre>
 <p>Let’s generalize the function to take the difference in two quantiles:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWQgPC0gZnVuY3Rpb24oeCwgcHJvYnMpIHtcbiAgICBzdG9waWZub3QoaXMubnVtZXJpYyh4KSlcbiAgICBpZiAobGVuZ3RoKHgpID09IDApIHtcbiAgICAgICAgd2FybmluZyhcIllvdSBpbnB1dHRlZCBhIGxlbmd0aC0wIHguIEV4cGVjdGluZyBsZW5ndGggPj0xLiBSZXR1cm5pbmcgTlVMTC5cIilcbiAgICAgICAgcmV0dXJuKE5VTEwpXG4gICAgfSBcbiAgICBxdmVjIDwtIHF1YW50aWxlKHgsIHByb2JzKVxuICAgIG1heChxdmVjKSAtIG1pbihxdmVjKVxufVxuYGBgIn0= -->
-<pre class="r"><code>qd &lt;- function(x, probs) {
-    stopifnot(is.numeric(x))
-    if (length(x) == 0) {
-        warning(&quot;You inputted a length-0 x. Expecting length &gt;=1. Returning NULL.&quot;)
-        return(NULL)
-    } 
-    qvec &lt;- quantile(x, probs)
-    max(qvec) - min(qvec)
-}</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Try it out:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBydW5pZigxMDApXG5xZCh4LCBjKDAuMjUsIDAuNzUpKVxuSVFSKHgpXG5xZCh4LCBjKDAsMSkpXG5tbW0yKHgpXG5gYGAifQ== -->
-<pre class="r"><code>x &lt;- runif(100)
-qd(x, c(0.25, 0.75))
-IQR(x)
-qd(x, c(0,1))
-mmm2(x)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW1tMih4KVxuXG5gYGAifQ== -->
+<pre class="r"><code>mmm2(x)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuOTgzNTQ0M1xuIn0= -->
+<pre><code>[1] 0.9835443</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Why did I call the arguments <code>x</code> and <code>probs</code>? Check out <code>?quantile</code>.</p>
@@ -409,17 +413,13 @@ mmm2(x)</code></pre>
 <p>Would be nice to have defaults for <code>probs</code>, right? Add them to the below code (which is copied and pasted from above):</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWQyIDwtIGZ1bmN0aW9uKHgsIHByb2JzKSB7XG4gICAgc3RvcGlmbm90KGlzLm51bWVyaWMoeCkpXG4gICAgaWYgKGxlbmd0aCh4KSA9PSAwKSB7XG4gICAgICAgIHdhcm5pbmcoXCJZb3UgaW5wdXR0ZWQgYSBsZW5ndGgtMCB4LiBFeHBlY3RpbmcgbGVuZ3RoID49MS4gUmV0dXJuaW5nIE5VTEwuXCIpXG4gICAgICAgIHJldHVybihOVUxMKVxuICAgIH0gXG4gICAgcXZlYyA8LSBxdWFudGlsZSh4LCBwcm9icylcbiAgICBtYXgocXZlYykgLSBtaW4ocXZlYylcbn1cbmBgYCJ9 -->
-<pre class="r"><code>qd2 &lt;- function(x, probs) {
-    stopifnot(is.numeric(x))
-    if (length(x) == 0) {
-        warning(&quot;You inputted a length-0 x. Expecting length &gt;=1. Returning NULL.&quot;)
-        return(NULL)
-    } 
-    qvec &lt;- quantile(x, probs)
-    max(qvec) - min(qvec)
-}</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWQyKHJub3JtKDEwMCkscHJvYnM9YygwLjI1LDAuNzUpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>qd2(rnorm(100),probs=c(0.25,0.75))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEuNTg3OTMxXG4ifQ== -->
+<pre><code>[1] 1.587931</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -428,10 +428,14 @@ mmm2(x)</code></pre>
 <p>Does this return what we were expecting?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudiA8LSBjKDE6MTAsIE5BKVxucWQodilcbmBgYCJ9 -->
-<pre class="r"><code>v &lt;- c(1:10, NA)
-qd(v)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWQodilcblxuYGBgIn0= -->
+<pre class="r"><code>qd(v)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcXVhbnRpbGUuZGVmYXVsdCh4LCBwcm9icykgOiBcbiAgbWlzc2luZyB2YWx1ZXMgYW5kIE5hTidzIG5vdCBhbGxvd2VkIGlmICduYS5ybScgaXMgRkFMU0VcbiJ9 -->
+<pre><code>Error in quantile.default(x, probs) : 
+  missing values and NaN's not allowed if 'na.rm' is FALSE</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Notice that <code>quantile()</code> has a <code>na.rm</code> option. Let’s use it in our <code>qd</code> function. Modify the code below:</p>
@@ -456,21 +460,17 @@ qd(v)</code></pre>
 <p>There are other arguments to <code>quantile</code>, like <code>type</code>, that are not used all that much. Put them in as ellipses:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWQyIDwtIGZ1bmN0aW9uKHgsIHByb2JzPWMoMCwxKSwgbmEucm09RkFMU0UsIEZJTExfVEhJU19JTikge1xuICAgIHN0b3BpZm5vdChpcy5udW1lcmljKHgpKVxuICAgIGlmIChsZW5ndGgoeCkgPT0gMCkge1xuICAgICAgICB3YXJuaW5nKFwiWW91IGlucHV0dGVkIGEgbGVuZ3RoLTAgeC4gRXhwZWN0aW5nIGxlbmd0aCA+PTEuIFJldHVybmluZyBOVUxMLlwiKVxuICAgICAgICByZXR1cm4oTlVMTClcbiAgICB9IFxuICAgIHF2ZWMgPC0gcXVhbnRpbGUoeCwgcHJvYnMsIG5hLnJtID0gbmEucm0sIEZJTExfVEhJU19JTilcbiAgICBtYXgocXZlYykgLSBtaW4ocXZlYylcbn1cbmBgYCJ9 -->
-<pre class="r"><code>qd2 &lt;- function(x, probs=c(0,1), na.rm=FALSE, FILL_THIS_IN) {
-    stopifnot(is.numeric(x))
-    if (length(x) == 0) {
-        warning(&quot;You inputted a length-0 x. Expecting length &gt;=1. Returning NULL.&quot;)
-        return(NULL)
-    } 
-    qvec &lt;- quantile(x, probs, na.rm = na.rm, FILL_THIS_IN)
-    max(qvec) - min(qvec)
-}</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWQyKDEpXG5cbmBgYCJ9 -->
+<pre class="r"><code>qd2(1)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDBcbiJ9 -->
+<pre><code>[1] 0</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCA1NDcgQ2xhc3MgTWVldGluZyAwMTogV3JpdGluZyB5b3VyIG93biBGdW5jdGlvbnMiCm91dHB1dDogaHRtbF9ub3RlYm9vawplZGl0b3Jfb3B0aW9uczogCiAgY2h1bmtfb3V0cHV0X3R5cGU6IGlubGluZQotLS0KCmBgYHtyfQpsaWJyYXJ5KGdhcG1pbmRlcikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodGVzdHRoYXQpCmBgYAoKVGhpcyB3b3Jrc2hlZXQgaXMgYSBjb25kZW5zZWQgdmVyc2lvbiBvZiBKZW5ueSdzIHN0YXQ1NDUuY29tIGZ1bmN0aW9ucyBbcGFydDFdKGh0dHA6Ly9zdGF0NTQ1LmNvbS9ibG9jazAxMV93cml0ZS15b3VyLW93bi1mdW5jdGlvbi0wMS5odG1sKSwgW3BhcnQyXShodHRwOi8vc3RhdDU0NS5jb20vYmxvY2swMTFfd3JpdGUteW91ci1vd24tZnVuY3Rpb24tMDIuaHRtbCksIGFuZCBbcGFydDNdKGh0dHA6Ly9zdGF0NTQ1LmNvbS9ibG9jazAxMV93cml0ZS15b3VyLW93bi1mdW5jdGlvbi0wMy5odG1sKS4KCiMjIFN5bnRheCBEZW1vCgpMZXQncyBkZW1vIHRoZSBzeW50YXggb2YgZnVuY3Rpb24tbWFraW5nLgoKYGBge3J9CnNxdWFyZSA8LSBmdW5jdGlvbih4KSB4XjIKc3F1YXJlKDEwKQoKIyB0aGUgcmV0dXJuIGZ1bmN0aW9uIHdpbGwgcmV0dXJuIHRoZSB5IHZhbHVlLCBvciB5b3UgY2FuIGp1c3QgdHlwZSAieSIsIGl0IHdpbGwgYWxzbyByZXR1cm4Kc3F1YXJlIDwtIGZ1bmN0aW9uKHgpIHsKICB5IDwtIHheMgogIHJldHVybih5KQp9CnNxdWFyZSgxMCkKCmBgYAoKIyMgTW90aXZhdGluZyBleGFtcGxlOiBtYXggbWludXMgbWluLgoKRmluZCB0aGUgbWF4IG1pbnVzIG1pbiBvZiB0aGUgZ2FwbWluZGVyIGxpZmUgZXhwZWN0YW5jeToKCmBgYHtyfQo/bWluCj9tYXgKCm1heChjKDEsMiwzKSxjKDIsMyw0KSkKcG1heChjKDEsMiwzKSxjKDEsMyw0KSkKCm1heChnYXBtaW5kZXIkbGlmZUV4cCkgLSBtaW4oZ2FwbWluZGVyJGxpZmVFeHApCmBgYAoKRXhlcmNpc2U6IHR1cm4gdGhpcyBpbnRvIGEgZnVuY3Rpb24hIGkuZS4sIHdyaXRlIGEgZnVuY3Rpb24gdGhhdCByZXR1cm5zIHRoZSBtYXggbWludXMgbWluIG9mIGEgdmVjdG9yLiBUcnkgaXQgb3V0IG9uIHRoZSBnYXBtaW5kZXIgdmFyaWFibGVzLgoKYGBge3J9Cm1heF9taW51c19taW4gPC0gZnVuY3Rpb24oeCkge21heCgpIC0gbWluKCl9CgpgYGAKCldlJ2xsIGJlIGJ1aWxkaW5nIG9uIHRoaXMuIERldmVsb3BtZW50IHBoaWxvc29waHkgW3dpZGVseSBhdHRyaWJ1dGVkIHRvIHRoZSBTcG90aWZ5IGRldmVsb3BtZW50IHRlYW1dKGh0dHA6Ly9ibG9nLmZhc3Rtb25rZXlzLmNvbS8/dXRtX2NvbnRlbnQ9YnVmZmVyYzJkNmUmdXRtX21lZGl1bT1zb2NpYWwmdXRtX3NvdXJjZT10d2l0dGVyLmNvbSZ1dG1fY2FtcGFpZ249YnVmZmVyKToKCiFbXShodHRwOi8vc3RhdDU0NS5jb20vaW1nL3Nwb3RpZnktaG93dG9idWlsZG12cC5naWYpCgojIyBUZXN0aW5nCgpDaGVjayB5b3VyIGZ1bmN0aW9uIHVzaW5nIHlvdXIgb3duIGV5ZWJhbGxzOgoKLSBBcHBseSB0byB0aGUgdmVjdG9yIDE6MTAuIERvIHlvdSBnZXQgdGhlIGludGVuZGVkIHJlc3VsdD8KLSBBcHBseSB0byBhIHJhbmRvbSB1bmlmb3JtIHZlY3Rvci4gRG8geW91IGdldCBtZWFuaW5nZnVsIHJlc3VsdHM/CgpgYGB7cn0KbWF4X21pbnVzX21pbigxOjEwKQptYXhfbWludXNfbWluKHJ1bmlmKDEwMCkpCmBgYAoKTGV0J3MgZm9ybWFsaXplIHRoaXMgdGVzdGluZyB3aXRoIHRoZSBgdGVzdHRoYXRgIHBhY2thZ2UuIGBleHBlY3RfKigpYCBmdW5jdGlvbnM6CgpgYGB7cn0KZXhwZWN0X2VxdWFsKDAuMSArIDAuMiwgMC4zKQpleHBlY3RfaWRlbnRpY2FsKDAuMSArIDAuMiwgMC4zKQpgYGAKCkFkZCBhbm90aGVyIGNoZWNrIHRvIHRoZSBmb2xsb3dpbmcgdW5pdCB0ZXN0LCBiYXNlZCBvbiB0aGUgdW5pZm9ybSByYW5kb20gbnVtYmVyczoKCmBgYHtyfQp0ZXN0X3RoYXQoIlNpbXBsZSBjYXNlcyB3b3JrIiwgewogICAgZXhwZWN0X2VxdWFsKG1heF9taW51c19taW4oMToxMCksIDkpCiAgICBGSUxMX1RISVNfSU4KfSkKYGBgCgojIyBUcnkgYW5kIGJyZWFrIHlvdXIgZnVuY3Rpb24KCkJlY2F1c2UgeW91IHdpbGwgZXZlbnR1YWxseSBmb3JnZXQgdGhlIGZ1bmN0aW9uIHNwZWNpZmljcy4KCmBgYHtyfQptYXhfbWludXNfbWluKG51bWVyaWMoMCkpCm1heF9taW51c19taW4oZ2FwbWluZGVyKQptYXhfbWludXNfbWluKGdhcG1pbmRlciRjb3VudHJ5KQpgYGAKClRoZXNlIGRvbid0IGJyZWFrIQoKYGBge3J9Cm1heF9taW51c19taW4oZ2FwbWluZGVyW2MoJ2xpZmVFeHAnLCAnZ2RwUGVyY2FwJywgJ3BvcCcpXSkKbWF4X21pbnVzX21pbihjKFRSVUUsIFRSVUUsIEZBTFNFLCBUUlVFLCBUUlVFKSkKYGBgCgpXZSB3YW50OgoKMS4gUHJldmVudCB0aGUgbGF0dGVyIGNhc2VzIGZyb20gaGFwcGVuaW5nLCBhbmQKMi4gTWFrZSBhIG1vcmUgaW5mb3JtYXRpdmUgZXJyb3IgbWVzc2FnZSBpbiB0aGUgZm9ybWVyLgoKQ2hlY2sgb3V0IGBzdG9waWZub3RgIGFuZCBgc3RvcGA6CgpgYGB7cn0Kc3RvcGlmbm90KEZBTFNFKQpzdG9wKCJIZXJlJ3MgbXkgbGl0dGxlIGVycm9yIG1lc3NhZ2UuIikKYGBgCgpZb3VyIHR1cm46ICBVc2UgdHdvIG1ldGhvZHM6CgoxLiBVc2luZyBgc3RvcGlmbm90YCwgbW9kaWZ5IHRoZSBtYXgtbWluIGZ1bmN0aW9uIHRvIHRocm93IGFuIGVycm9yIGlmIGFuIGlucHV0IGlzIG5vdCBudW1lcmljICh0aGUgYGlzLm51bWVyaWNgIGZ1bmN0aW9uIGlzIHVzZWZ1bCkuCgpgYGB7cn0KbW1tMSA8LSBmdW5jdGlvbih4KSB7CiAgICBGSUxMX1RISVNfSU4KICAgIG1heCh4KSAtIG1pbih4KQp9CmBgYAoKMi4gVXNpbmcgYHN0b3BgIGFuZCBhbiBgaWZgIHN0YXRlbWVudCwgTW9kaWZ5IHRoZSBtYXgtbWluIGZ1bmN0aW9uIHRvOgogICAgLSB0aHJvdyBhbiBlcnJvciBpZiBhbiBpbnB1dCBpcyBub3QgbnVtZXJpYy4gSW4gdGhlIGVycm9yIG1lc3NhZ2UsIGluZGljYXRlIHdoYXQncyBleHBlY3RlZCBhcyBhbiBhcmd1bWVudCwgYW5kIHdoYXQgd2FzIHJlY2lldmVkLiAKICAgIC0gcmV0dXJuIGBOVUxMYCBpZiB0aGUgaW5wdXQgaXMgbGVuZ3RoLTAsIHdpdGggYSB3YXJuaW5nIHVzaW5nIHRoZSBgd2FybmluZ2AgZnVuY3Rpb24uCgpgYGB7cn0KbW1tMiA8LSBmdW5jdGlvbih4KSB7CiAgICBpZiAoIWlzLm51bWVyaWMoeCkpIHsKICAgICAgICBGSUxMX1RISVNfSU4KICAgIH0KICAgIG1heCh4KSAtIG1pbih4KQp9CmBgYAoKVHJ5IGJyZWFraW5nIHRoZSBmdW5jdGlvbiBub3c6CgpgYGB7cn0KbW1tMSgobnVtZXJpYygwKSkpCm1tbTEoZ2FwbWluZGVyKQptbW0xKGdhcG1pbmRlciRjb3VudHJ5KQptbW0xKGdhcG1pbmRlcltjKCdsaWZlRXhwJywgJ2dkcFBlcmNhcCcsICdwb3AnKV0pCm1tbTEoYyhUUlVFLCBUUlVFLCBGQUxTRSwgVFJVRSwgVFJVRSkpCgptbTIoKG51bWVyaWMoMCkpKQptbW0yKGdhcG1pbmRlcikKbW1tMihnYXBtaW5kZXIkY291bnRyeSkKbW1tMihnYXBtaW5kZXJbYygnbGlmZUV4cCcsICdnZHBQZXJjYXAnLCAncG9wJyldKQptbW0yKGMoVFJVRSwgVFJVRSwgRkFMU0UsIFRSVUUsIFRSVUUpKQpgYGAKCiMjIE5hbWluZywgYW5kIGdlbmVyYWxpemluZyB0byBxdWFudGlsZSBkaWZmZXJlbmNlCgpMZXQncyBnZW5lcmFsaXplIHRoZSBmdW5jdGlvbiB0byB0YWtlIHRoZSBkaWZmZXJlbmNlIGluIHR3byBxdWFudGlsZXM6CgpgYGB7cn0KcWQgPC0gZnVuY3Rpb24oeCwgcHJvYnMpIHsKICAgIHN0b3BpZm5vdChpcy5udW1lcmljKHgpKQogICAgaWYgKGxlbmd0aCh4KSA9PSAwKSB7CiAgICAgICAgd2FybmluZygiWW91IGlucHV0dGVkIGEgbGVuZ3RoLTAgeC4gRXhwZWN0aW5nIGxlbmd0aCA+PTEuIFJldHVybmluZyBOVUxMLiIpCiAgICAgICAgcmV0dXJuKE5VTEwpCiAgICB9IAogICAgcXZlYyA8LSBxdWFudGlsZSh4LCBwcm9icykKICAgIG1heChxdmVjKSAtIG1pbihxdmVjKQp9CmBgYAoKVHJ5IGl0IG91dDoKCmBgYHtyfQp4IDwtIHJ1bmlmKDEwMCkKcWQoeCwgYygwLjI1LCAwLjc1KSkKSVFSKHgpCnFkKHgsIGMoMCwxKSkKbW1tMih4KQpgYGAKCldoeSBkaWQgSSBjYWxsIHRoZSBhcmd1bWVudHMgYHhgIGFuZCBgcHJvYnNgPyBDaGVjayBvdXQgYD9xdWFudGlsZWAuIAoKSWYgd2UgaW5wdXQgYSB2ZWN0b3Igc3RvcmVkIGluIHNvbWUgdmFyaWFibGUsIG5lZWQgdGhhdCB2YXJpYWJsZSBiZSBuYW1lZCBgeGA/CgojIyBEZWZhdWx0cwoKV291bGQgYmUgbmljZSB0byBoYXZlIGRlZmF1bHRzIGZvciBgcHJvYnNgLCByaWdodD8gQWRkIHRoZW0gdG8gdGhlIGJlbG93IGNvZGUgKHdoaWNoIGlzIGNvcGllZCBhbmQgcGFzdGVkIGZyb20gYWJvdmUpOgoKYGBge3J9CnFkMiA8LSBmdW5jdGlvbih4LCBwcm9icykgewogICAgc3RvcGlmbm90KGlzLm51bWVyaWMoeCkpCiAgICBpZiAobGVuZ3RoKHgpID09IDApIHsKICAgICAgICB3YXJuaW5nKCJZb3UgaW5wdXR0ZWQgYSBsZW5ndGgtMCB4LiBFeHBlY3RpbmcgbGVuZ3RoID49MS4gUmV0dXJuaW5nIE5VTEwuIikKICAgICAgICByZXR1cm4oTlVMTCkKICAgIH0gCiAgICBxdmVjIDwtIHF1YW50aWxlKHgsIHByb2JzKQogICAgbWF4KHF2ZWMpIC0gbWluKHF2ZWMpCn0KYGBgCgojIyBOQSBoYW5kbGluZwoKRG9lcyB0aGlzIHJldHVybiB3aGF0IHdlIHdlcmUgZXhwZWN0aW5nPwoKYGBge3J9CnYgPC0gYygxOjEwLCBOQSkKcWQodikKYGBgCgpOb3RpY2UgdGhhdCBgcXVhbnRpbGUoKWAgaGFzIGEgYG5hLnJtYCBvcHRpb24uIExldCdzIHVzZSBpdCBpbiBvdXIgYHFkYCBmdW5jdGlvbi4gTW9kaWZ5IHRoZSBjb2RlIGJlbG93OgoKYGBge3J9CnFkMiA8LSBmdW5jdGlvbih4LCBwcm9icz1jKDAsMSkpIHsKICAgIHN0b3BpZm5vdChpcy5udW1lcmljKHgpKQogICAgaWYgKGxlbmd0aCh4KSA9PSAwKSB7CiAgICAgICAgd2FybmluZygiWW91IGlucHV0dGVkIGEgbGVuZ3RoLTAgeC4gRXhwZWN0aW5nIGxlbmd0aCA+PTEuIFJldHVybmluZyBOVUxMLiIpCiAgICAgICAgcmV0dXJuKE5VTEwpCiAgICB9IAogICAgcXZlYyA8LSBxdWFudGlsZSh4LCBwcm9icykKICAgIG1heChxdmVjKSAtIG1pbihxdmVjKQp9CmBgYAoKIyMgRWxsaXBzZXMKClRoZXJlIGFyZSBvdGhlciBhcmd1bWVudHMgdG8gYHF1YW50aWxlYCwgbGlrZSBgdHlwZWAsIHRoYXQgYXJlIG5vdCB1c2VkIGFsbCB0aGF0IG11Y2guIFB1dCB0aGVtIGluIGFzIGVsbGlwc2VzOgoKYGBge3J9CnFkMiA8LSBmdW5jdGlvbih4LCBwcm9icz1jKDAsMSksIG5hLnJtPUZBTFNFLCBGSUxMX1RISVNfSU4pIHsKICAgIHN0b3BpZm5vdChpcy5udW1lcmljKHgpKQogICAgaWYgKGxlbmd0aCh4KSA9PSAwKSB7CiAgICAgICAgd2FybmluZygiWW91IGlucHV0dGVkIGEgbGVuZ3RoLTAgeC4gRXhwZWN0aW5nIGxlbmd0aCA+PTEuIFJldHVybmluZyBOVUxMLiIpCiAgICAgICAgcmV0dXJuKE5VTEwpCiAgICB9IAogICAgcXZlYyA8LSBxdWFudGlsZSh4LCBwcm9icywgbmEucm0gPSBuYS5ybSwgRklMTF9USElTX0lOKQogICAgbWF4KHF2ZWMpIC0gbWluKHF2ZWMpCn0KYGBg</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBVCA1NDcgQ2xhc3MgTWVldGluZyAwMTogV3JpdGluZyB5b3VyIG93biBGdW5jdGlvbnMiCm91dHB1dDogaHRtbF9ub3RlYm9vawplZGl0b3Jfb3B0aW9uczogCiAgY2h1bmtfb3V0cHV0X3R5cGU6IGlubGluZQotLS0KCmBgYHtyfQpsaWJyYXJ5KGdhcG1pbmRlcikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodGVzdHRoYXQpCmBgYAoKVGhpcyB3b3Jrc2hlZXQgaXMgYSBjb25kZW5zZWQgdmVyc2lvbiBvZiBKZW5ueSdzIHN0YXQ1NDUuY29tIGZ1bmN0aW9ucyBbcGFydDFdKGh0dHA6Ly9zdGF0NTQ1LmNvbS9ibG9jazAxMV93cml0ZS15b3VyLW93bi1mdW5jdGlvbi0wMS5odG1sKSwgW3BhcnQyXShodHRwOi8vc3RhdDU0NS5jb20vYmxvY2swMTFfd3JpdGUteW91ci1vd24tZnVuY3Rpb24tMDIuaHRtbCksIGFuZCBbcGFydDNdKGh0dHA6Ly9zdGF0NTQ1LmNvbS9ibG9jazAxMV93cml0ZS15b3VyLW93bi1mdW5jdGlvbi0wMy5odG1sKS4KCiMjIFN5bnRheCBEZW1vCgpMZXQncyBkZW1vIHRoZSBzeW50YXggb2YgZnVuY3Rpb24tbWFraW5nLgoKYGBge3J9CnNxdWFyZSA8LSBmdW5jdGlvbih4KSB4XjIKc3F1YXJlKDEwKQoKIyB0aGUgcmV0dXJuIGZ1bmN0aW9uIHdpbGwgcmV0dXJuIHRoZSB5IHZhbHVlLCBvciB5b3UgY2FuIGp1c3QgdHlwZSAieSIsIGl0IHdpbGwgYWxzbyByZXR1cm4Kc3F1YXJlIDwtIGZ1bmN0aW9uKHgpIHsKICB5IDwtIHheMgogIHJldHVybih5KQp9CnNxdWFyZSgxMCkKCmBgYAoKIyMgTW90aXZhdGluZyBleGFtcGxlOiBtYXggbWludXMgbWluLgoKRmluZCB0aGUgbWF4IG1pbnVzIG1pbiBvZiB0aGUgZ2FwbWluZGVyIGxpZmUgZXhwZWN0YW5jeToKCmBgYHtyfQo/bWluCj9tYXgKCm1heChjKDEsMiwzKSxjKDIsMyw0KSkKcG1heChjKDEsMiwzKSxjKDEsMyw0KSkKCm1heChnYXBtaW5kZXIkbGlmZUV4cCkgLSBtaW4oZ2FwbWluZGVyJGxpZmVFeHApCmBgYAoKRXhlcmNpc2U6IHR1cm4gdGhpcyBpbnRvIGEgZnVuY3Rpb24hIGkuZS4sIHdyaXRlIGEgZnVuY3Rpb24gdGhhdCByZXR1cm5zIHRoZSBtYXggbWludXMgbWluIG9mIGEgdmVjdG9yLiBUcnkgaXQgb3V0IG9uIHRoZSBnYXBtaW5kZXIgdmFyaWFibGVzLgoKYGBge3J9Cm1heF9taW51c19taW4gPC0gZnVuY3Rpb24oeCkge21heCh4KSAtIG1pbih4KX0KbWF4X21pbnVzX21pbigxOjEwKQpgYGAKCldlJ2xsIGJlIGJ1aWxkaW5nIG9uIHRoaXMuIERldmVsb3BtZW50IHBoaWxvc29waHkgW3dpZGVseSBhdHRyaWJ1dGVkIHRvIHRoZSBTcG90aWZ5IGRldmVsb3BtZW50IHRlYW1dKGh0dHA6Ly9ibG9nLmZhc3Rtb25rZXlzLmNvbS8/dXRtX2NvbnRlbnQ9YnVmZmVyYzJkNmUmdXRtX21lZGl1bT1zb2NpYWwmdXRtX3NvdXJjZT10d2l0dGVyLmNvbSZ1dG1fY2FtcGFpZ249YnVmZmVyKToKCiFbXShodHRwOi8vc3RhdDU0NS5jb20vaW1nL3Nwb3RpZnktaG93dG9idWlsZG12cC5naWYpCgojIyBUZXN0aW5nCgpDaGVjayB5b3VyIGZ1bmN0aW9uIHVzaW5nIHlvdXIgb3duIGV5ZWJhbGxzOgoKLSBBcHBseSB0byB0aGUgdmVjdG9yIDE6MTAuIERvIHlvdSBnZXQgdGhlIGludGVuZGVkIHJlc3VsdD8KLSBBcHBseSB0byBhIHJhbmRvbSB1bmlmb3JtIHZlY3Rvci4gRG8geW91IGdldCBtZWFuaW5nZnVsIHJlc3VsdHM/CgpgYGB7cn0KbWF4X21pbnVzX21pbigxOjEwKQptYXhfbWludXNfbWluKHJ1bmlmKDEwMCkpCmBgYAoKTGV0J3MgZm9ybWFsaXplIHRoaXMgdGVzdGluZyB3aXRoIHRoZSBgdGVzdHRoYXRgIHBhY2thZ2UuIGBleHBlY3RfKigpYCBmdW5jdGlvbnM6CgpgYGB7cn0KCmV4cGVjdF9lcXVhbCgwLjEgKyAwLjIsIDAuMykKZXhwZWN0X2lkZW50aWNhbCgwLjEgKyAwLjIsIDAuMykKYGBgCgpBZGQgYW5vdGhlciBjaGVjayB0byB0aGUgZm9sbG93aW5nIHVuaXQgdGVzdCwgYmFzZWQgb24gdGhlIHVuaWZvcm0gcmFuZG9tIG51bWJlcnM6CgpgYGB7cn0KcnVuaWYoMTAwKQojbHM9bGVzcyB0aGFuCnRlc3RfdGhhdCgiU2ltcGxlIGNhc2VzIHdvcmsiLCB7CiAgICBleHBlY3RfZXF1YWwobWF4X21pbnVzX21pbigxOjEwKSwgOSkKICAgIGV4cGVjdF9sdChtYXhfbWludXNfbWluKHJ1bmlmKDEwMCksMSkpCiAgICAKfSkKYGBgCgojIyBUcnkgYW5kIGJyZWFrIHlvdXIgZnVuY3Rpb24KCkJlY2F1c2UgeW91IHdpbGwgZXZlbnR1YWxseSBmb3JnZXQgdGhlIGZ1bmN0aW9uIHNwZWNpZmljcy4KCmBgYHtyfQptYXhfbWludXNfbWluKG51bWVyaWMoMCkpCm1heF9taW51c19taW4oZ2FwbWluZGVyKQptYXhfbWludXNfbWluKGdhcG1pbmRlciRjb3VudHJ5KQpgYGAKClRoZXNlIGRvbid0IGJyZWFrIQoKYGBge3J9Cm1heF9taW51c19taW4oZ2FwbWluZGVyW2MoJ2xpZmVFeHAnLCAnZ2RwUGVyY2FwJywgJ3BvcCcpXSkKbWF4X21pbnVzX21pbihjKFRSVUUsIFRSVUUsIEZBTFNFLCBUUlVFLCBUUlVFKSkKYGBgCgpXZSB3YW50OgoKMS4gUHJldmVudCB0aGUgbGF0dGVyIGNhc2VzIGZyb20gaGFwcGVuaW5nLCBhbmQKMi4gTWFrZSBhIG1vcmUgaW5mb3JtYXRpdmUgZXJyb3IgbWVzc2FnZSBpbiB0aGUgZm9ybWVyLgoKQ2hlY2sgb3V0IGBzdG9waWZub3RgIGFuZCBgc3RvcGA6CgpgYGB7cn0Kc3RvcGlmbm90KEZBTFNFKQpzdG9wKCJIZXJlJ3MgbXkgbGl0dGxlIGVycm9yIG1lc3NhZ2UuIikKYGBgCgpZb3VyIHR1cm46ICBVc2UgdHdvIG1ldGhvZHM6CgoxLiBVc2luZyBgc3RvcGlmbm90YCwgbW9kaWZ5IHRoZSBtYXgtbWluIGZ1bmN0aW9uIHRvIHRocm93IGFuIGVycm9yIGlmIGFuIGlucHV0IGlzIG5vdCBudW1lcmljICh0aGUgYGlzLm51bWVyaWNgIGZ1bmN0aW9uIGlzIHVzZWZ1bCkuCgpgYGB7cn0KbW1tMSA8LSBmdW5jdGlvbih4KSB7CiAgICBzdG9waWZub3QoIWlzLm51bWVyaWMoeCkpCiAgICBtYXgoeCkgLSBtaW4oeCkKfQptbW0xKFRydWUpCm1tbTEoImhlbGxvIikKYGBgCgoyLiBVc2luZyBgc3RvcGAgYW5kIGFuIGBpZmAgc3RhdGVtZW50LCBNb2RpZnkgdGhlIG1heC1taW4gZnVuY3Rpb24gdG86CiAgICAtIHRocm93IGFuIGVycm9yIGlmIGFuIGlucHV0IGlzIG5vdCBudW1lcmljLiBJbiB0aGUgZXJyb3IgbWVzc2FnZSwgaW5kaWNhdGUgd2hhdCdzIGV4cGVjdGVkIGFzIGFuIGFyZ3VtZW50LCBhbmQgd2hhdCB3YXMgcmVjaWV2ZWQuIAogICAgLSByZXR1cm4gYE5VTExgIGlmIHRoZSBpbnB1dCBpcyBsZW5ndGgtMCwgd2l0aCBhIHdhcm5pbmcgdXNpbmcgdGhlIGB3YXJuaW5nYCBmdW5jdGlvbi4KCmBgYHtyfQptbW0yIDwtIGZ1bmN0aW9uKHgpIHsKICAgIGlmICghaXMubnVtZXJpYyh4KSkgewogICAgICAgIHN0b3AoIkV4cGVjdGluZyB4IHRvIGJlIG51bWVyaWMuIFlvdSBnYXZlIG1lIiwgdHlwZW9mKHgpKQogICAgfQogICAgbWF4KHgpIC0gbWluKHgpCn0KYGBgCgpUcnkgYnJlYWtpbmcgdGhlIGZ1bmN0aW9uIG5vdzoKCmBgYHtyfQptbW0xKChudW1lcmljKDApKSkKbW1tMShnYXBtaW5kZXIpCm1tbTEoZ2FwbWluZGVyJGNvdW50cnkpCm1tbTEoZ2FwbWluZGVyW2MoJ2xpZmVFeHAnLCAnZ2RwUGVyY2FwJywgJ3BvcCcpXSkKbW1tMShjKFRSVUUsIFRSVUUsIEZBTFNFLCBUUlVFLCBUUlVFKSkKCm1tMigobnVtZXJpYygwKSkpCm1tbTIoZ2FwbWluZGVyKQptbW0yKGdhcG1pbmRlciRjb3VudHJ5KSNjb3VudHJ5PWZhY3RvcnMsIGFuZCBmYWNvdHJzIGFyZSBpbnRlZ2VycwptbW0yKGdhcG1pbmRlcltjKCdsaWZlRXhwJywgJ2dkcFBlcmNhcCcsICdwb3AnKV0pCm1tbTIoYyhUUlVFLCBUUlVFLCBGQUxTRSwgVFJVRSwgVFJVRSkpCmBgYAoKIyMgTmFtaW5nLCBhbmQgZ2VuZXJhbGl6aW5nIHRvIHF1YW50aWxlIGRpZmZlcmVuY2UKCkxldCdzIGdlbmVyYWxpemUgdGhlIGZ1bmN0aW9uIHRvIHRha2UgdGhlIGRpZmZlcmVuY2UgaW4gdHdvIHF1YW50aWxlczoKCmBgYHtyfQpxZCA8LSBmdW5jdGlvbih4LCBwcm9icykgewogICAgc3RvcGlmbm90KGlzLm51bWVyaWMoeCkpCiAgICBpZiAobGVuZ3RoKHgpID09IDApIHsKICAgICAgICB3YXJuaW5nKCJZb3UgaW5wdXR0ZWQgYSBsZW5ndGgtMCB4LiBFeHBlY3RpbmcgbGVuZ3RoID49MS4gUmV0dXJuaW5nIE5VTEwuIikKICAgICAgICByZXR1cm4oTlVMTCkKICAgIH0gCiAgICBxdmVjIDwtIHF1YW50aWxlKHgsIHByb2JzKQogICAgbWF4KHF2ZWMpIC0gbWluKHF2ZWMpCn0KYGBgCgpUcnkgaXQgb3V0OgoKYGBge3J9CnggPC0gcnVuaWYoMTAwKQpxZCh4LCBjKDAuMjUsIDAuNzUpKQpJUVIoeCkKcWQoeCwgYygwLDEpKQptbW0yKHgpCmBgYAoKV2h5IGRpZCBJIGNhbGwgdGhlIGFyZ3VtZW50cyBgeGAgYW5kIGBwcm9ic2A/IENoZWNrIG91dCBgP3F1YW50aWxlYC4gCgpJZiB3ZSBpbnB1dCBhIHZlY3RvciBzdG9yZWQgaW4gc29tZSB2YXJpYWJsZSwgbmVlZCB0aGF0IHZhcmlhYmxlIGJlIG5hbWVkIGB4YD8KCiMjIERlZmF1bHRzCgpXb3VsZCBiZSBuaWNlIHRvIGhhdmUgZGVmYXVsdHMgZm9yIGBwcm9ic2AsIHJpZ2h0PyBBZGQgdGhlbSB0byB0aGUgYmVsb3cgY29kZSAod2hpY2ggaXMgY29waWVkIGFuZCBwYXN0ZWQgZnJvbSBhYm92ZSk6CgpgYGB7cn0KcWQyIDwtIGZ1bmN0aW9uKHgsIHByb2JzPWMoMCwxKSkgewogICAgc3RvcGlmbm90KGlzLm51bWVyaWMoeCkpCiAgICBpZiAobGVuZ3RoKHgpID09IDApIHsKICAgICAgICB3YXJuaW5nKCJZb3UgaW5wdXR0ZWQgYSBsZW5ndGgtMCB4LiBFeHBlY3RpbmcgbGVuZ3RoID49MS4gUmV0dXJuaW5nIE5VTEwuIikKICAgICAgICByZXR1cm4oTlVMTCkKICAgIH0gCiAgICBxdmVjIDwtIHF1YW50aWxlKHgsIHByb2JzKQogICAgbWF4KHF2ZWMpIC0gbWluKHF2ZWMpCn0KcWQyKHJub3JtKDEwMCkscHJvYnM9YygwLjI1LDAuNzUpKQpgYGAKCiMjIE5BIGhhbmRsaW5nCgpEb2VzIHRoaXMgcmV0dXJuIHdoYXQgd2Ugd2VyZSBleHBlY3Rpbmc/CgpgYGB7cn0KP3F1YW50aWxlCnYgPC0gYygxOjEwLCBOQSkKcWQodikKYGBgCgpOb3RpY2UgdGhhdCBgcXVhbnRpbGUoKWAgaGFzIGEgYG5hLnJtYCBvcHRpb24uIExldCdzIHVzZSBpdCBpbiBvdXIgYHFkYCBmdW5jdGlvbi4gTW9kaWZ5IHRoZSBjb2RlIGJlbG93OgoKYGBge3J9CnFkMiA8LSBmdW5jdGlvbih4LCBwcm9icz1jKDAsMSkpIHsKICAgIHN0b3BpZm5vdChpcy5udW1lcmljKHgpKQogICAgaWYgKGxlbmd0aCh4KSA9PSAwKSB7CiAgICAgICAgd2FybmluZygiWW91IGlucHV0dGVkIGEgbGVuZ3RoLTAgeC4gRXhwZWN0aW5nIGxlbmd0aCA+PTEuIFJldHVybmluZyBOVUxMLiIpCiAgICAgICAgcmV0dXJuKE5VTEwpCiAgICB9IAogICAgcXZlYyA8LSBxdWFudGlsZSh4LCBwcm9icykKICAgIG1heChxdmVjKSAtIG1pbihxdmVjKQp9CmBgYAoKIyMgRWxsaXBzZXMKClRoZXJlIGFyZSBvdGhlciBhcmd1bWVudHMgdG8gYHF1YW50aWxlYCwgbGlrZSBgdHlwZWAsIHRoYXQgYXJlIG5vdCB1c2VkIGFsbCB0aGF0IG11Y2guIFB1dCB0aGVtIGluIGFzIGVsbGlwc2VzOgoKYGBge3J9CiMuLi4gbWVhbnMgdGhhdCB5b3UgY2FuIHB1dCBhbnl0aGluZyBoZXJlLCB0aGUgLi4uIGluIGZ1bmN0aW9uIHNob3VsZCBtYXRjaCAuLi4gaW4gcXVhbnRpbGUuIFRoZSBvcmRlciBtYXR0ZXJzLiBUaGUgb3JkZXIgc2hvdWxkIGJlIHNhbWUuCnFkMiA8LSBmdW5jdGlvbih4LCBwcm9icz1jKDAsMSksIG5hLnJtPUZBTFNFLCAuLi4pIHsKICAgIHN0b3BpZm5vdChpcy5udW1lcmljKHgpKQogICAgaWYgKGxlbmd0aCh4KSA9PSAwKSB7CiAgICAgICAgd2FybmluZygiWW91IGlucHV0dGVkIGEgbGVuZ3RoLTAgeC4gRXhwZWN0aW5nIGxlbmd0aCA+PTEuIFJldHVybmluZyBOVUxMLiIpCiAgICAgICAgcmV0dXJuKE5VTEwpCiAgICB9IAogICAgcXZlYyA8LSBxdWFudGlsZSh4LCBwcm9icywgbmEucm0gPSBuYS5ybSwgLi4uKQogICAgbWF4KHF2ZWMpIC0gbWluKHF2ZWMpCn0KCnJub3JtKDEwMCkKdiA8LSBybm9ybSgxMDApCnFkMih2LHByb2JzPWMoMSwwKSxuYS5ybT1UUlVFLHR5cGU9MSkKCnFkMigxKQpgYGA=</div>
 
 
 
