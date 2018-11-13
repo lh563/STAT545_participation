@@ -14,22 +14,27 @@ library(shiny)
 # tags function: h1 and em function
 # don't have to put tags everytime, such as h1 
 
-a <- 5
-print(a^2)
+
+bcl <- read.csv("~/Documents/STAT 545/Participation/parcipation/cm106/bcl/bcl-data.csv", stringsAsFactors = FALSE)
 
 ui <- fluidPage(
-  tags$h1('level 1 header'),
-  h1(em('level 1 header,part 2')),
-  HTML("<h1>level 1 header,part 3</h1>"),
-  tags$a(href="https://shiny.rstudio.com/articles/tag-glossary.html","Click here!"),
-  p(tags$b("This text is bold.")),
-  br(),# start another line
-  tags$iframe(src = "www.rstudio.com", seamless=NA)
+  titlePanel("BC Liquor price app", 
+             windowTitle = "BCL app"),
+  sidebarLayout(
+    sidebarPanel("This text is in the sidebar."),
+    mainPanel(
+      plotOutput("price_hist"),
+      tableOutput("bcl_data")
+      )
+  )
  )
 
 # Define server logic required to draw a histogram
+# server does not have to add "," between them
+
 server <- function(input, output) {
- 
+  output$price_hist <- renderPlot(ggplot2::qplot(bcl$Price))
+  output$bcl_data <- renderTable(bcl)
 }
 
 # Run the application 
